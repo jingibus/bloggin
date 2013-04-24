@@ -7,9 +7,9 @@ This emulator then needs a new instance of the APK under test on it.. The whole 
 
 This slow rate of speed to run tests was a dealbreaker, and i felt it would likely reduce the chances we'd actively use the tests! Fortunately for us, the [Robolectric Project](http://pivotal.github.io/robolectric/) from Pivotal Labs has done the hard work of removing this dependency. 
 
-Effectively, **Robolectric** replaces the behavior of code that would otherwise require an emulator or actual device with it's own, and once set up, we can write jUnit-style tests against our classes without needing the baggage of the emulator! It does this using so-called "Shadow Classes", mock implementations of android core libraries. 
+Effectively, **Robolectric** replaces the behavior of code that would otherwise require an emulator or actual device with it's own, and once set up, we can write jUnit-style tests against our classes without needing the baggage of the emulator! It does this using so-called "**Shadow Classes**", mock implementations of android core libraries. 
 
-**Robolectric** also goes further than this, enabling you to provide your own custom behavior for these shadow classes! This is extremely helpful for custom test behavior you may need. For example, my current project depends upon loading large sets of data to the sqlite database managed by android. Using the "Shadow Class" notion, **Robolectric** allowed me to implement a 'test fixture' style database reset, where any changes that may have happened to a default set of data i provide gets reset to ensure I can assert results dependent upon this data. Here's what i mean:
+**Robolectric** also goes further than this, enabling you to provide your own custom behavior for these shadow classes! This is extremely helpful for custom test behavior you may need. For example, my current project depends upon loading large sets of data to the sqlite database managed by android. Using the "**Shadow Class**" notion, **Robolectric** allowed me to implement a 'test fixture' style database reset, where any changes that may have happened to a default set of data i provide gets reset to ensure I can assert results dependent upon this data. Here's what i mean:
 
 <pre>
 public class MyTestRunner extends RobolectricTestRunner{
@@ -41,7 +41,7 @@ public class TestDatabaseStuff extends BaseAttTest{
 </pre>
 
 The **MyShadowSQLiteDatabase** implementation provides custom behavior that points to our custom test database. 
-Without Robolectric, we would be dependent upon the core android class behavior.
+Without **Robolectric**, we would be dependent upon the core android class behavior.
 
 ###Syntactic Sugar
 Having a way to run tests fast, i then began to look for ways to write tests faster and more cleanly. 
